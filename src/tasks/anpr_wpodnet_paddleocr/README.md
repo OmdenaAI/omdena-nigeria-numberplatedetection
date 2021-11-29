@@ -4,4 +4,4 @@
 
 1. ```pip install requirements.txt```
 
-2. Run ```python python3 main.py --image_dir PATH TO IMAGE```
+2. Run ```python3 main.py --image_dir PATH TO IMAGE```
