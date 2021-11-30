@@ -168,7 +168,10 @@ def reconstruct(I, Iresized, Yr, lp_threshold):
     final_labels_frontal = nms(labels_frontal, 0.1)
 
     #print(final_labels_frontal)
-    assert final_labels_frontal, "No License plate is founded!"
+    #assert final_labels_frontal, "No License plate is found!"
+
+    if final_labels_frontal == []:
+        return "No Plate founded!"
 
     # LP size and type
     out_size, lp_type = (two_lines, 2) if ((final_labels_frontal[0].wh()[0] / final_labels_frontal[0].wh()[1]) < 1.7) else (one_line, 1)
