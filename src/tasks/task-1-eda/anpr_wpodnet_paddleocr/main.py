@@ -69,7 +69,11 @@ if __name__ == "__main__":
     #update the image path to run
     image_path = args.image_dir
 
-    LpImg,cor = get_plate(image_path)
+    try:
+        LpImg,cor = get_plate(image_path)
+    except Exception as e:
+        logger.error("Dmax value is not fit changing to 208")
+        LpImg, cor = get_plate(image_path, Dmax=208)
     print("Detected %i plate(s) in"%len(LpImg),splitext(basename(image_path))[0])
     print("Coordinate of plate(s) in image: \n", cor)
 
@@ -83,5 +87,7 @@ if __name__ == "__main__":
     ans=[]
     for line in result:
         if len(line[1][0]) >= 7:
-            ans.append(clean_text(line[1][0]))
+            text = clean_text(line[1][0])
+            if text.isalnum() and not text.isalpha():
+                ans.append(text)
     logger.info(ans)
