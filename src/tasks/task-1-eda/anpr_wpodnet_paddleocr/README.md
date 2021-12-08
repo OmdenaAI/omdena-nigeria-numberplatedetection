@@ -5,3 +5,4 @@
 1. ```pip install requirements.txt```
 
 2. Run ```python3 main.py --image_dir PATH TO IMAGE```
+3. To run the app ```flask run```
