@@ -1,0 +1,85 @@
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digit Recognition Real Time</title>
+    <script src="/static/jquery.min.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css')}}"> -->
+    <link rel="stylesheet" type="text/css" href="/static/main.css">
+</head>
+
+<body>
+    <div class="top_div">
+        <p style="color:white;font-size: x-large">ANPR (Omdena Abuja)</p>
+    </div>
+    <div class="ndiv">
+        <p style="color: white;font-size: x-large">This is an ANPR project. Select an image</p>
+    </div>
+    <div>
+        <script>
+            // To download the image use
+            // const link = document.createElement('a');
+            // link.download = 'digit_image.png';
+            // link.href = canvas.toDataURL();
+            // link.click();
+            // link.delete; 
+
+            let base64Img;
+
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $('#blah')
+                            .attr('src', e.target.result);
+                        base64Img = reader.result
+                        console.log(base64Img)
+                    };
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            function save_image() {
+                $.ajax({
+                    type: "POST",
+                    url: "/predict",
+                    data: {
+                        imageBase64: base64Img
+                    },
+                    beforeSend: function () {
+                        p.innerHTML = "Processing your input...this may take a few seconds";
+                    }
+                }).done(function (result) {
+                    digit.innerHTML = result.digit
+                    p.innerHTML = "Done"
+                });
+            }
+        </script>
+        <div style="position: relative; justify-content: center;text-align: center;">
+            <form method="post" action="/" enctype="multipart/form-data">
+                <dl>
+                    <p>
+                        <input type="file" name="file" onchange="readURL(this);" autocomplete="off" required>
+                    <div>
+                        <img style="width: 30%;height: 60%;border-style: hidden;" id="blah" src="Select an image" />
+                    </div>
+                    </p>
+                </dl>
+            </form>
+        </div>
+    </div>
+    <div style="padding: 0.4rem;text-align: center;">
+        <button class="button" onclick="javascript:save_image();return false;">Submit</button>
+    </div>
+    <div class="ndiv">
+        <p id="p"></p>
+    </div>
+    <div class="slantedDiv">
+        <p>The Number Plate is: <span id="digit"></span></p>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+.top_div{
+    width:100%;
+    height:5rem;
+    background-color: black;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.ndiv{
+    width:100%;
+    height:5rem;
+    background-color: deepskyblue;
+    text-align: center;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body{
+    margin:0rem;
+    padding:0rem;
+}
+.canv{
+    width: 30rem;
+    height: 30rem;
+    background-color: white;
+    border-color: black;
+    border-style: solid;
+}
+#trapezoidd{
+    width: 100%;
+    height: 10rem;
+    background-color: black;
+    display: flex;
+    justify-content: left;
+    align-items: top;
+}
+.button {
+    transition-duration: 0.4s;
+    background-color: white;
+    border: 2px solid chartreuse;
+    color: black;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 0.5rem;
+}
+
+.button:hover {
+    background-color: chartreuse;
+    color: white;
+}
+.slantedDiv {
+    position: relative;
+    width: 100%;
+    height: 30%;
+    background: yellow;
+    color: #222;
+    font-size: 20px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
