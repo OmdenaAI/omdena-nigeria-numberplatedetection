@@ -28,16 +28,22 @@
 
             function readURL(input) {
                 if (input.files && input.files[0]) {
-                    var reader = new FileReader();
+                    var name = input.files[0].name.split(".")[1];
+                    var re = ["jpeg", "jpg", "png", "tiff", "webp", "bmp"];
+                    if (re.includes(name)) {
+                        var reader = new FileReader();
 
-                    reader.onload = function (e) {
-                        $('#blah')
-                            .attr('src', e.target.result);
-                        base64Img = reader.result
-                        console.log(base64Img)
-                    };
+                        reader.onload = function (e) {
+                            $('#blah')
+                                .attr('src', e.target.result);
+                            base64Img = reader.result
+                        };
 
-                    reader.readAsDataURL(input.files[0]);
+                        reader.readAsDataURL(input.files[0]);
+                    }
+                    else {
+                        alert("Select an image");
+                    }
                 }
             }
 
@@ -54,6 +60,8 @@
                 }).done(function (result) {
                     digit.innerHTML = result.digit
                     p.innerHTML = "Done"
+                }).fail(function (result) {
+                    p.innerHTML = "Opps...something went wrong"
                 });
             }
         </script>
